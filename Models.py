@@ -50,7 +50,7 @@ class NearEarthObject:
         self.diameter = diameter
         self.hazardous = hazardous
         # Create an empty initial collection of linked approaches.
-        self.approaches = approaches
+        self.approaches = []
 
     @property
     def fullname(self, _fullname = str):
@@ -130,7 +130,7 @@ class CloseApproach:
         formatted string that can be used in human-readable representations and
         in serialization to CSV and JSON files.
         """
-        self.time = datetime_to_str(self.time)
+        self.time = self.time
         # TODO: Use this object's `.time` attribute and the `datetime_to_str` function to
         # build a formatted representation of the approach time.
         # TODO: Use self.designation and self.name to build a fullname for this object.

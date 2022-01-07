@@ -46,22 +46,14 @@ class NEODatabase:
 
         # TODO: Link together the NEOs and their close approaches.
     
-        #approaches_by_des_dict = {neo.designation: neo for neo in json_file} # Creates a dictionary of the designation and closeapproach data
-        neos_by_designation_dict = {neo1.designation: neo1 for neo1 in csv_file} # Creats a dictionary of the name and Neo data
-		
-		 for approach in self._approaches:
+        neos_by_designation_dict = {neo.designation: neo for neo in csv_file} # Craets a dictionary of the name and Neo data
+      
+        for approach in self._approaches:
             neo = neos_by_designation_dict[approach.designation]   
             approach.neo = neo
-            neo.approaches.append(approach)
-"""
-		 for approach in self._approaches:
-            neo = neos_by_designation_dict[approach.designation]
-            ca = approaches_by_des_dict[approach.designation]
-            ca.neo = neo.name #sets the name which is set to None in the CloseApproaches to the neo name if any exists           
-            neo.neo_approaches = ca
-            print(neo)
-	"""  
-	
+            neo.approaches.append(approach)   
+
+        
     def get_neo_by_designation(self, designation):
         """Find and return an NEO by its primary designation.
 
@@ -76,9 +68,9 @@ class NEODatabase:
         :return: The `NearEarthObject` with the desired primary designation, or `None`.
         """
         # TODO: Fetch an NEO by its designation.
-        for j in range(len(csv_file)):
-            if designation == csv_file[j].designation:
-                return csv_file[j]
+        for j in range(len(self._neos)):
+            if designation == self._neos[j].designation:
+                return self._neos[j]
                 break
             else:
                 continue
@@ -99,10 +91,10 @@ class NEODatabase:
         :return: The `NearEarthObject` with the desired name, or `None`.
         """
         # TODO: Fetch an NEO by its name.
-        for i in range(len(csv_file)):
+        for i in range(len(self._neos)):
             if name != None:
-                if name == csv_file[i].name:
-                    return csv_file[i]
+                if name == self._neos[i].name:
+                    return self._neos[i]
                     break
                 else:
                     continue
@@ -128,6 +120,6 @@ class NEODatabase:
     
 
 database = NEODatabase(csv_file, json_file)
-database_des = database.get_neo_by_designation('289P')
-database_name = database.get_neo_by_name('Hermes')
-print(database_name.approaches)
+database_des = database.get_neo_by_designation('2019 AE3')
+database_name = database.get_neo_by_name('LINEAR')
+print(database_des.approaches)
